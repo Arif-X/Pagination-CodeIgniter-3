@@ -11,12 +11,14 @@ class paginate extends CI_Controller {
 	function index(){
 
         //konfigurasi pagination
-        $config['base_url'] = site_url('paginate/index'); //site url
+        $config['base_url'] = site_url('paginate/page'); //site url
         $config['total_rows'] = $this->db->count_all('misuh'); //total row
         $config['per_page'] = 2;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
         $choice = $config["total_rows"] / $config["per_page"];
         $config["num_links"] = floor($choice);
+        $config['use_page_numbers'] = TRUE;
+        $config['reuse_query_string'] = TRUE;
 
         $config['first_link']       = 'First';
         $config['last_link']        = 'Last';
@@ -48,4 +50,5 @@ class paginate extends CI_Controller {
         //load view mahasiswa view
         $this->load->view('pagination',$data);
     }
+
 }
